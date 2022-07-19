@@ -59,6 +59,10 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public boolean deletePerson(Long personId) {
+        if(personRepository.existsById(personId)){
+            personRepository.deleteById(personId);
+            return true;
+        }
         return false;
     }
 

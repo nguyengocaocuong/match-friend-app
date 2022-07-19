@@ -64,4 +64,9 @@ public class AccountController {
     public boolean checkAndUpdatePass(@RequestBody OTP otp){
         return accountService.checkAndUpdatePass(otp.getEmail(),otp.getOtp(), otp.getNewPass());
     }
+
+    @DeleteMapping("/delete-account/{id}")
+    public boolean deleteAccount(@PathVariable("id") Long id){
+        return accountService.deletePerson(id);
+    }
 }
