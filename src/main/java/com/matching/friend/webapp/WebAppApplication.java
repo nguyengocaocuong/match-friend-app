@@ -23,7 +23,6 @@ public class WebAppApplication {
         SpringApplication.run(WebAppApplication.class, args);
     }
 
-    @Bean
     CommandLineRunner run(PersonRepository personRepository, HobbyRepository hobbyRepository, FreeTimeActionRepository freeTimeActionRepository, LocationRepository locationRepository) {
         return args -> {
             Location location1 = locationRepository.save(Location.builder().locationName("Nghệ An").build());
