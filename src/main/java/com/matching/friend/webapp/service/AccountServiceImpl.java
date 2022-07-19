@@ -60,6 +60,10 @@ public class AccountServiceImpl implements AccountService{
     @Override
     public boolean deletePerson(Long personId) {
         if(personRepository.existsById(personId)){
+            Person person = personRepository.findById(personId).orElse(null);
+            Hobby hobby = hobbyRepository.findByPerson(person);
+            if(hobby != null)
+                hobbyRepository.delete(hobby);
             personRepository.deleteById(personId);
             return true;
         }
@@ -68,7 +72,9 @@ public class AccountServiceImpl implements AccountService{
 
     public boolean checkAndUpdatePass(String email, String password, String newPass){
         if(Util.checkOtp(email,password)){
-            System.out.println("Success");
+            Person person = personRepository.findByEmail(email).orElse(null);
+            person.setPassword(newPass);
+            personRepository.save(person);
             return true;
         }else return false;
     }
