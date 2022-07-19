@@ -56,6 +56,10 @@ public class AccountController {
         return accountService.resetPass(email);
     }
 
+    @PostMapping("/login")
+    public Person login(@RequestBody Person person){
+        return accountService.login(person.getEmail(),person.getPassword());
+    }
     @PostMapping("/check-update-pass")
     public boolean checkAndUpdatePass(@RequestBody OTP otp){
         return accountService.checkAndUpdatePass(otp.getEmail(),otp.getOtp(), otp.getNewPass());
